@@ -72,6 +72,6 @@ export default {
   },
 
   getResults: async (callback: UserCallback) => {
-    console.log('penis')
+
   }
 };

@@ -13,7 +13,7 @@ const SearchBar: React.FC = () => {
   const [topic, setTopic] = useState<String>('');
 
   const clickMe = () => {
-    console.log('blimey')
+
   }
 
   const handleClick = (term: String) => {
