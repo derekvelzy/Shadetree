@@ -4,6 +4,7 @@ import { Context } from './context/context';
 import CarouselItem from './CarouselItem';
 import styled from 'styled-components';
 import { Service } from '../database/model/model';
+import colors from './meta/colors';
 
 const Carousel: React.FC = () => {
   const [position, setPosition] = useState(0);
@@ -16,7 +17,6 @@ const Carousel: React.FC = () => {
     } else if (dir === 'f' && position > (-1 * max)) {
       setPosition(position - (211 * 5));
     }
-    console.log(position);
   }
 
   return (
@@ -42,6 +42,7 @@ const Browse = styled.div`
   text-align: center;
   font-size: 22px;
   font-weight: 600;
+  color: #${colors.navy}
 `
 const CaroContainer = styled.div`
   display: flex;

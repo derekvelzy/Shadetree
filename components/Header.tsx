@@ -1,33 +1,41 @@
 import * as React from 'react';
 import { Parallax, Background } from 'react-parallax';
-import Search from './Search';
+import SearchBar from './SearchBar';
+import UserInfo from './UserInfo';
 import styled from 'styled-components';
 import styles from '../styles/Home.module.css';
 import colors from './meta/colors';
 
-const Header: React.FC = () => (
-  <Head>
-    <div style={{ height: "1vh", background: `#${colors.cream}` }}></div>
-    <Parallax strength={300}>
-      <Background>
-        <BGImage src="https://derekvelzy-website-images.s3-us-west-1.amazonaws.com/racerEdit.jpg" />
-      </Background>
-      <Container>
-        <HeaderBar>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Icon src="https://shadetree-project.s3-us-west-1.amazonaws.com/whiteIcon.png"/>
-            <Title className={styles.cur}>Shadetree</Title>
-          </div>
-          <HeaderDetails>
-            <div style={{ fontSize: "18px" }}>Become a Mech</div>
-            <ProfileIcon></ProfileIcon>
-          </HeaderDetails>
-        </HeaderBar>
-        <Search />
-      </Container>
-    </Parallax>
-  </Head>
-)
+const Header: React.FC = () => {
+
+  return (
+    <Head>
+      <div style={{ height: "1vh", background: `#${colors.cream}` }}></div>
+      <Parallax strength={300}>
+        <Background>
+          <BGImage src="https://derekvelzy-website-images.s3-us-west-1.amazonaws.com/racerEdit.jpg" />
+        </Background>
+        <Container>
+          <HeaderBar>
+            <div style={{ display: "flex", justifyContent: "space-between", width: "980px" }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Icon src="https://shadetree-project.s3-us-west-1.amazonaws.com/whiteIcon.png"/>
+                <Title className={styles.cur}>Shadetree</Title>
+              </div>
+              <HeaderDetails>Become a Mech</HeaderDetails>
+            </div>
+            <UserContainer>
+              <UserInfo />
+            </UserContainer>
+          </HeaderBar>
+          <SearchBarContainer>
+            <SearchBar />
+          </SearchBarContainer>
+        </Container>
+      </Parallax>
+    </Head>
+  )
+}
 
 const BGImage = styled.img`
   width: 97vw;
@@ -55,26 +63,26 @@ const HeaderBar = styled.div`
 `
 const HeaderDetails = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 250px;
-  display: flex;
   align-items: center;
 `
 const Icon = styled.img`
   height: 44px;
   margin-right: 30px;
 `
-const ProfileIcon = styled.div`
-  border: 1px solid white;
-  width: 50px;
-  height: 50px;
-  align-self: center;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
+const SearchBarContainer = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.9) 0px 0px 20px;
+  width: 600px;
+  border-radius: 22px;
 `
 const Title = styled.div`
   font-weight: 500;
   font-size: 50px;
+`
+const UserContainer = styled.div`
+  align-self: flex-center;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 20px;
+  height: 50px;
+  border-radius: 25px;
 `
 
 export default Header;

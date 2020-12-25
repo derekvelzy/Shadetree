@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Top, Service } from '../../database/model/model';
+import { Top, Service, User } from '../../database/model/model';
 
 export interface TopTotal {
   user_id: Number;
@@ -22,6 +22,12 @@ interface AppContextInterface {
   setTopUsers: (arg: TopTotal[]) => void,
   services: Service[],
   setServices: (arg: Service[]) => void;
+  selectedService: String,
+  setSelectedService: (arg: String) => void;
+  selectedCity: String;
+  setSelectedCity: (arg: String) => void;
+  user: User;
+  getResults: (arg1: String, arg2: String) => void;
 }
 
 export const Context = createContext<AppContextInterface | null>(null);
@@ -31,13 +37,19 @@ type Props = {
 }
 
 export const ConfigProvider: React.FC = ({ children }: Props) => {
-  // ALL STATE GOES HERE
   const [topUsers, setTopUsers] = useState<TopTotal[]>([]);
   const [services, setServices] = useState<Service[]>([]);
+  const [selectedService, setSelectedService] = useState<String>('');
+  const [selectedCity, setSelectedCity] = useState<String>('');
+  const [user, setUser] = useState<User>(null);
+
+  const getResults = (service: String, city: String) => {
+    console.log(service, city);
+
+  }
 
   useEffect(() => {
     async function getData() {
-      // get Data from the server
       axios.get('http://localhost:3000/api/topUsers')
         .then((results) => {
           const users: Top[] = results.data.topUsers;
@@ -68,6 +80,11 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
           setTopUsers(narrow);
           setServices(results.data.services);
         })
+
+      axios.get('http://localhost:3000/api/userData')
+        .then((results) => {
+          setUser(results.data);
+        })
     }
     getData();
   }, []);
@@ -78,7 +95,13 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
         topUsers,
         setTopUsers,
         services,
-        setServices
+        setServices,
+        selectedService,
+        setSelectedService,
+        selectedCity,
+        setSelectedCity,
+        user,
+        getResults
       }}
     >
       {children}

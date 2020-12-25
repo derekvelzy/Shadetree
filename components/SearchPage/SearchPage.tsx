@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Header from './Header';
-import Home from './Home';
+import Results from './Results';
 
-const App: React.FC = () => {
+const SearchPage: React.FC = () => {
 
   return (
     <div>
       <Header />
-      <Home />
+      <Results />
     </div>
   )
 }
 
-export default App;
+export default SearchPage;

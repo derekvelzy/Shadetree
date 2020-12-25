@@ -16,4 +16,4 @@ const colors = {
 //   navy: "3d405b",
 // }
 
-export default colors
+export default colors;

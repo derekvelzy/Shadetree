@@ -59,14 +59,16 @@ const ProfilePic = styled.img`
 const Service = styled.div`
   margin-right: 16px;
   cursor: pointer;
-  color: #${colors.blue};
+  color: #${colors.cream};
   border: 1px solid #${colors.blue};
+  background: #${colors.blue};
   font-size: 14px;
   padding: 2px 5px;
   border-radius: 5px;
   &:hover {
-    color: #${colors.navy};
-    border: 1px solid #${colors.navy};
+    color: #${colors.blue};
+    border: 1px solid #${colors.blue};
+    background: none;
   }
 `
 const Services = styled.div`
