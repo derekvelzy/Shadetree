@@ -72,6 +72,11 @@ export default {
   },
 
   getResults: async (callback: UserCallback) => {
-
+    try {
+      const q = 'SELECT * FROM users where';
+      callback(null, 'placeholder');
+    } catch (e) {
+      callback(e, null);
+    }
   }
 };
