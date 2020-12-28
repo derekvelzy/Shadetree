@@ -2,10 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import model, { Combined } from '../../database/model/model';
 import db from '../../database/connect/db';
 
-interface Fetcher {
-  (err: Error | null, results: Combined | null): void;
-}
-
 export default (req: NextApiRequest, res: NextApiResponse) => {
   model.getInitialPageLoad((err: Error | null, results?: Combined | null) => {
     if (err) {

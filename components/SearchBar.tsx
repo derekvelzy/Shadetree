@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Context } from './context/context';
 import styled from 'styled-components';
 import colors from './meta/colors'
@@ -11,10 +11,15 @@ const SearchBar: React.FC = () => {
 
   const [filter, setFilter] = useState<String[]>([]);
   const [topic, setTopic] = useState<String>('');
+  const [cityStrings, setCityStrings] = useState([]);
 
-  const clickMe = () => {
+  useEffect(() => {
+    const arrString = cities.map((city) => {
+      return city.name;
+    })
+    setCityStrings(arrString);
+  }, [])
 
-  }
 
   const handleClick = (term: String) => {
     topic === 'services' ? cont.setSelectedService(term) : cont.setSelectedCity(term);
@@ -30,7 +35,7 @@ const SearchBar: React.FC = () => {
       setFilter([])
     } else {
       const mapServices = cont.services.map(s => s.service);
-      let arr = type === 'services' ? mapServices : cities;
+      let arr = type === 'services' ? mapServices : cityStrings;
       const mapFilter = arr.filter(s => {
         const splitSearch = s.split(' ');
         for (let i = 0; i < splitSearch.length; i++) {

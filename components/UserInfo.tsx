@@ -36,6 +36,7 @@ const Arrow = styled.img`
 `
 const Container = styled.div`
   border-radius: 25px;
+  z-index: 5;
 `
 const DropDown = styled.div`
   display: flex;

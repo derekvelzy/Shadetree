@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import model, { User } from '../../database/model/model';
+import model, { TopTotal } from '../../database/model/model';
 import db from '../../database/connect/db';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  model.getResults((err: Error | null, results?: User | null) => {
+  model.getResults(req.query, (err: Error | null, results?: TopTotal[] | null) => {
     if (err) {
       res.status(400);
       res.end()

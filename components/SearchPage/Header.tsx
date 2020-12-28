@@ -11,11 +11,9 @@ import Link from 'next/link';
 const Header: React.FC = () => {
   const cont = useContext(Context);
 
-  useEffect(() => {
-    console.log(cont)
-  }, [cont])
-
-  console.log(cont);
+  // useEffect(() => {
+  //   console.log(cont)
+  // }, [cont])
 
   return (
     <Head>
