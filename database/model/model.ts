@@ -185,7 +185,7 @@ export default {
           const claim = {username: pass.rows[0].username};
           const jwt = sign(claim, token);
 
-          callback(null, {authToken: jwt});
+          callback(null, jwt);
         } else {
           callback(err, null);
         }

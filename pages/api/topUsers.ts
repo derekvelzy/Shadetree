@@ -8,10 +8,11 @@ const authentication = (fn: NextApiHandler) => async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  verify(req.headers.authorization, token, async (err, decoded) => {
+  verify(req.cookies.auth, token, async (err, decoded) => {
     if (!err && decoded) {
       return await fn(req, res)
     }
+    console.log('error in topUsers', err);
     res.status(401).json({message: 'Failed Authentication'});
   })
 }

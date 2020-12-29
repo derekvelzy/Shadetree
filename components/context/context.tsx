@@ -51,7 +51,7 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
     async function getData() {
       axios.get('http://localhost:3000/api/topUsers', {
         headers: {
-          'Authorization': auth
+          'Content-Type': 'application/json'
         }
       })
         .then((results) => {
@@ -64,10 +64,9 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
           setUser(results.data);
         })
     }
-    if (auth !== '') {
-      getData();
-    }
-  }, [auth]);
+    console.log('auth!', auth, location.pathname)
+    getData();
+  }, []);
 
   return (
     <Context.Provider

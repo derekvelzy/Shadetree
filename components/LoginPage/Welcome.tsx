@@ -30,13 +30,10 @@ const Welcome: React.FC = () => {
     })
       .then((results) => {
         if (results.data !== "") {
-          cont.setAuth(results.data.authToken);
+          Router.push('/');
         } else {
           console.log('error')
         }
-      })
-      .then(() => {
-        Router.push('/');
       })
   }
 
