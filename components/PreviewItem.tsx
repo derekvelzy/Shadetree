@@ -42,7 +42,7 @@ const Container = styled.div`
   margin: 0px 0px 30px 0px;
   background: #${colors.blue};
   background: white;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 18px;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 10px 26px;
   border-radius: 20px;
   width: 480px;
 `

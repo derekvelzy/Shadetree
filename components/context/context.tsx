@@ -64,7 +64,6 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
           setUser(results.data);
         })
     }
-    console.log('auth!', auth, location.pathname)
     getData();
   }, []);
 

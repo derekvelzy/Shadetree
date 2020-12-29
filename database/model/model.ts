@@ -165,10 +165,20 @@ export default {
 
   signup: async (userData, callback) => {
     try {
-      hash(userData.password, 10, (err, hash) => {
-        const q = `insert into users (username, first, last, mech, rating, location, password) values ('${userData.username}', '${userData.first}', '${userData.last}', false, 5, '${userData.location}', '${hash}')`;
-        db.query(q);
-        callback(null, 'ok');
+      hash(userData.password, 10, async (err, hash) => {
+        const q1 = `select * from users where username = '${userData.username}'`;
+        const check = await db.query(q1);
+        if (check.rows.length !== 0) {
+          callback(null, 'existing user');
+        } else {
+          const q1 = `insert into users (username, first, last, mech, rating, location, password) values ('${userData.username}', '${userData.first}', '${userData.last}', false, 5, '${userData.location}', '${hash}')`;
+          await db.query(q1);
+          const q2 = `select * from users where username = '${userData.username}'`
+          const results = await db.query(q2);
+          const claim = {username: results.rows[0].username};
+          const jwt = sign(claim, token);
+          callback(null, jwt);
+        }
       });
     } catch (e) {
       callback(e, null);
