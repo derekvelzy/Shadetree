@@ -16,6 +16,8 @@ interface AppContextInterface {
   results: TopTotal[];
   user: User;
   getResults: (arg1: String, arg2: String) => void;
+  auth: String;
+  setAuth: (arg: String) => void;
 }
 
 export const Context = createContext<AppContextInterface | null>(null);
@@ -31,6 +33,7 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
   const [selectedCity, setSelectedCity] = useState<String>('');
   const [user, setUser] = useState<User>(null);
   const [results, setResults] = useState<TopTotal[]>([]);
+  const [auth, setAuth] = useState<String>('');
 
   const getResults = (service: String, city: String) => {
     axios.get('http://localhost:3000/api/getResults', {
@@ -40,14 +43,17 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
         }
       })
         .then((results) => {
-          console.log(results.data);
           setResults(results.data);
         })
   }
 
   useEffect(() => {
     async function getData() {
-      axios.get('http://localhost:3000/api/topUsers')
+      axios.get('http://localhost:3000/api/topUsers', {
+        headers: {
+          'Authorization': auth
+        }
+      })
         .then((results) => {
           setTopUsers(results.data.topUsers);
           setServices(results.data.services);
@@ -58,8 +64,10 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
           setUser(results.data);
         })
     }
-    getData();
-  }, []);
+    if (auth !== '') {
+      getData();
+    }
+  }, [auth]);
 
   return (
     <Context.Provider
@@ -74,7 +82,9 @@ export const ConfigProvider: React.FC = ({ children }: Props) => {
         setSelectedCity,
         results,
         user,
-        getResults
+        getResults,
+        auth,
+        setAuth
       }}
     >
       {children}

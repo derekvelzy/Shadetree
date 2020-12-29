@@ -1,4 +1,7 @@
 import db from '../connect/db';
+import { hash, compare } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
+import token from '../secret';
 
 export interface Top {
   user_id: Number;
@@ -158,5 +161,37 @@ export default {
     } catch (e) {
       callback(e, null);
     }
-  }
+  },
+
+  signup: async (userData, callback) => {
+    try {
+      hash(userData.password, 10, (err, hash) => {
+        const q = `insert into users (username, first, last, mech, rating, location, password) values ('${userData.username}', '${userData.first}', '${userData.last}', false, 5, '${userData.location}', '${hash}')`;
+        db.query(q);
+        callback(null, 'ok');
+      });
+    } catch (e) {
+      callback(e, null);
+    }
+  },
+
+  login: async (userData, callback) => {
+    try {
+      const q = `select username, password from users where username = '${userData.username}'`
+      const pass = await db.query(q);
+
+      compare(userData.password, pass.rows[0].password, (err, result) => {
+        if (!err && result && userData.username === pass.rows[0].username) {
+          const claim = {username: pass.rows[0].username};
+          const jwt = sign(claim, token);
+
+          callback(null, {authToken: jwt});
+        } else {
+          callback(err, null);
+        }
+      });
+    } catch (e) {
+      callback(e, null);
+    }
+  },
 };
