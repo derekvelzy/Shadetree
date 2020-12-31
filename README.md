@@ -30,6 +30,8 @@ __Other technologies used__
 - Bcrypt
 - JSON Web Token
 
+Dummy data avatars provided by Rick & Morty API
+
 ## Run the Project Locally ##
 From the repo
 1. Clone the project locally
