@@ -3,7 +3,6 @@
 ## Overview ##
 This app was created to help people with car/motorcycle troubles find a local hobbyist mechanic, or to help others find specialty work that would otherwise be more difficult to find (harness rewiring, retrofitting, painting).
 
-This is currently an MVP with the ability to login, signup, search for a specific service at a specific area, and browse top rated mechanics.
 
 ## Screenshots ##
 ![Shadetree Home](https://shadetree-project.s3-us-west-1.amazonaws.com/Shadetree_home.png)
